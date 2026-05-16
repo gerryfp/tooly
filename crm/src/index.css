@@ -1,0 +1,74 @@
+:root {
+  --bg: #0c0f14;
+  --bg2: #121820;
+  --bg3: #1a2230;
+  --ink: #e8ecf4;
+  --muted: #8b96a8;
+  --accent: #c4a574;
+  --accent2: #6eb5a0;
+  --line: #2a3548;
+  --danger: #c96a6a;
+  --r: 10px;
+  --font: "IBM Plex Mono", ui-monospace, monospace;
+  --serif: "Instrument Serif", Georgia, serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#mr0 {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font);
+  font-size: 13px;
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Labels live in attr(data-t), not as visible DOM text from agents */
+.lx::after,
+[data-lx]::after {
+  content: attr(data-t);
+}
+
+.lx,
+[data-lx] {
+  font-size: inherit;
+  color: inherit;
+}
+
+.lx:empty::after,
+[data-lx]:empty::after {
+  display: inline;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+motion-board,
+motion-lane,
+motion-rail,
+motion-grid,
+motion-list,
+motion-stack,
+motion-decoy {
+  display: block;
+}
