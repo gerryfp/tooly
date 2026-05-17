@@ -1,0 +1,10 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "rewrites": [
+    { "source": "/layout.md", "destination": "/layout.md" },
+    { "source": "/mcpui.json", "destination": "/mcpui.json" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

@@ -1,4 +1,7 @@
 import { Lx } from "../components/Lx";
+import { Seal } from "../components/Seal";
+import { CaptureAction } from "../mcpui/CaptureAction";
+import { useSealed } from "../hooks/useSealed";
 
 function fmtWhen(ts) {
   return new Date(ts).toLocaleString(undefined, {
@@ -10,6 +13,7 @@ function fmtWhen(ts) {
 }
 
 export function Marginalia({ notes, personName, onEdit, onDrop }) {
+  const { unseal, isOpen } = useSealed();
   const sorted = [...notes].sort((a, b) => b.ts - a.ts);
 
   return (
@@ -20,20 +24,26 @@ export function Marginalia({ notes, personName, onEdit, onDrop }) {
         </p>
       ) : (
         sorted.map((n) => (
-          <article key={n.id} className="mar-i" data-id={n.id}>
-            <header className="mar-h">
-              <span className="mar-who">{personName(n.pid)}</span>
-              <time className="mar-w">{fmtWhen(n.ts)}</time>
-            </header>
-            <p className="mar-b">{n.b}</p>
-            <footer className="mar-ft">
-              <button type="button" className="mar-ed" data-op="n3" onClick={() => onEdit(n)}>
-                ✎
-              </button>
-              <button type="button" className="mar-rm" data-op="n2" onClick={() => onDrop(n.id)}>
-                ×
-              </button>
-            </footer>
+          <article key={n.id} className={`mar-i ${isOpen(n.id) ? "mar-i--on" : ""}`} data-id={n.id}>
+            <Seal open={isOpen(n.id)} id={n.id} onUnseal={unseal} className="mar-sl">
+              <>
+                <header className="mar-h">
+                  <span className="mar-who">{personName(n.pid)}</span>
+                  <time className="mar-w">{fmtWhen(n.ts)}</time>
+                </header>
+                <p className="mar-b">{n.b}</p>
+                <footer className="mar-ft">
+                  <CaptureAction testid={`note-${n.id}`} label={`Edit note for ${personName(n.pid)}`}>
+                    <button type="button" className="mar-ed" data-op="n3" onClick={() => onEdit(n)}>
+                      ✎
+                    </button>
+                  </CaptureAction>
+                  <button type="button" className="mar-rm" data-op="n2" onClick={() => onDrop(n.id)}>
+                    ×
+                  </button>
+                </footer>
+              </>
+            </Seal>
           </article>
         ))
       )}

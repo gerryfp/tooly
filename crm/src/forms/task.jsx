@@ -3,7 +3,7 @@ import { L, PRIOS } from "../lex";
 export function TaskForm({ draft, setDraft, people }) {
   return (
     <>
-      <Field lx="f0">
+      <Field lx="f0" mcpui={{ testid: "task-title", label: "Task title" }}>
         <input
           className="inp"
           value={draft.t}
@@ -11,7 +11,7 @@ export function TaskForm({ draft, setDraft, people }) {
           required
         />
       </Field>
-      <Field lx="f9">
+      <Field lx="f9" mcpui={{ testid: "task-due", label: "Due date" }}>
         <input
           className="inp"
           type="date"
@@ -24,7 +24,7 @@ export function TaskForm({ draft, setDraft, people }) {
           }
         />
       </Field>
-      <Field lx="f12">
+      <Field lx="f12" mcpui={{ testid: "task-priority", label: "Priority", kind: "selector" }}>
         <select
           className="inp"
           value={draft.pr}
@@ -37,7 +37,7 @@ export function TaskForm({ draft, setDraft, people }) {
           ))}
         </select>
       </Field>
-      <Field lx="f10">
+      <Field lx="f10" mcpui={{ testid: "task-person", label: "Linked person", kind: "selector" }}>
         <select
           className="inp"
           value={draft.pid}

@@ -2,7 +2,7 @@ import { Field } from "../components/Field";
 export function PersonForm({ draft, setDraft }) {
   return (
     <>
-      <Field lx="f4">
+      <Field lx="f4" mcpui={{ testid: "person-name", label: "Person name" }}>
         <input
           className="inp"
           value={draft.n}
@@ -10,7 +10,7 @@ export function PersonForm({ draft, setDraft }) {
           required
         />
       </Field>
-      <Field lx="f5">
+      <Field lx="f5" mcpui={{ testid: "person-email", label: "Email address" }}>
         <input
           className="inp"
           type="email"
@@ -18,21 +18,21 @@ export function PersonForm({ draft, setDraft }) {
           onChange={(e) => setDraft({ ...draft, e: e.target.value })}
         />
       </Field>
-      <Field lx="f6">
+      <Field lx="f6" mcpui={{ testid: "person-phone", label: "Phone number" }}>
         <input
           className="inp"
           value={draft.ph}
           onChange={(e) => setDraft({ ...draft, ph: e.target.value })}
         />
       </Field>
-      <Field lx="f7">
+      <Field lx="f7" mcpui={{ testid: "person-company", label: "Company" }}>
         <input
           className="inp"
           value={draft.co}
           onChange={(e) => setDraft({ ...draft, co: e.target.value })}
         />
       </Field>
-      <Field lx="f8">
+      <Field lx="f8" mcpui={{ testid: "person-tags", label: "Tags (comma-separated)" }}>
         <input
           className="inp"
           value={(draft.tg || []).join(", ")}

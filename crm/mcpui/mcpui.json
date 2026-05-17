@@ -1,0 +1,126 @@
+{
+  "mcpui_spec_version": 1,
+  "title": "Pipeline",
+  "current_screen_id": "page-t0",
+  "pages": {
+    "page-t0": {
+      "id": "page-t0",
+      "title": "Pipeline",
+      "url": "/pipeline",
+      "viewport": {
+        "width": 930,
+        "height": 550
+      },
+      "components": [
+        {
+          "testid": "nav-pipeline",
+          "kind": "action",
+          "selector": "[data-testid=\"nav-pipeline\"]",
+          "bounds": {
+            "x": 8,
+            "y": 69,
+            "width": 40,
+            "height": 40
+          },
+          "label": "Open Pipeline tab"
+        },
+        {
+          "testid": "nav-rolodex",
+          "kind": "action",
+          "selector": "[data-testid=\"nav-rolodex\"]",
+          "bounds": {
+            "x": 8,
+            "y": 115,
+            "width": 40,
+            "height": 40
+          },
+          "label": "Open Rolodex tab"
+        },
+        {
+          "testid": "nav-chronicle",
+          "kind": "action",
+          "selector": "[data-testid=\"nav-chronicle\"]",
+          "bounds": {
+            "x": 8,
+            "y": 160,
+            "width": 40,
+            "height": 40
+          },
+          "label": "Open Chronicle tab"
+        },
+        {
+          "testid": "nav-marginalia",
+          "kind": "action",
+          "selector": "[data-testid=\"nav-marginalia\"]",
+          "bounds": {
+            "x": 8,
+            "y": 206,
+            "width": 40,
+            "height": 40
+          },
+          "label": "Open Marginalia tab"
+        },
+        {
+          "testid": "vault-import",
+          "kind": "action",
+          "selector": "[data-testid=\"vault-import\"]",
+          "bounds": {
+            "x": -7,
+            "y": 432,
+            "width": 69,
+            "height": 48
+          },
+          "label": "Import vault JSON file"
+        },
+        {
+          "testid": "vault-export",
+          "kind": "action",
+          "selector": "[data-testid=\"vault-export\"]",
+          "bounds": {
+            "x": -7,
+            "y": 486,
+            "width": 69,
+            "height": 48
+          },
+          "label": "Export vault JSON file"
+        },
+        {
+          "testid": "filter-open",
+          "kind": "action",
+          "selector": "[data-testid=\"filter-open\"]",
+          "bounds": {
+            "x": 788,
+            "y": 25,
+            "width": 76,
+            "height": 32
+          },
+          "label": "Open people filter field"
+        },
+        {
+          "testid": "record-create",
+          "kind": "action",
+          "selector": "[data-testid=\"record-create\"]",
+          "bounds": {
+            "x": 873,
+            "y": 25,
+            "width": 33,
+            "height": 32
+          },
+          "label": "Create new pipeline record"
+        },
+        {
+          "testid": "page-t0",
+          "kind": "page",
+          "selector": "[data-testid=\"page-t0\"]",
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "width": 930,
+            "height": 550
+          },
+          "label": "Pipeline kanban board"
+        }
+      ]
+    }
+  }
+}

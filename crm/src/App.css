@@ -1,6 +1,6 @@
 .shell {
   display: grid;
-  grid-template-columns: 72px 1fr;
+  grid-template-columns: 56px 1fr;
   min-height: 100vh;
 }
 
@@ -29,11 +29,11 @@
 
 .z0-tab {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 0.25rem;
-  width: 56px;
-  padding: 0.55rem 0.25rem;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
   border: none;
   border-radius: var(--r);
   background: transparent;
@@ -53,17 +53,8 @@
 }
 
 .z0-glyph {
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   line-height: 1;
-}
-
-.z0-lx {
-  font-size: 9px;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  max-width: 52px;
-  text-align: center;
-  line-height: 1.2;
 }
 
 .z0-foot {
@@ -274,15 +265,81 @@
 }
 
 .cd-rail {
-  display: flex;
+  display: none;
   gap: 0.2rem;
   margin-top: 0.25rem;
-  opacity: 0;
-  transition: opacity 0.15s;
 }
 
-.cd:hover .cd-rail {
-  opacity: 1;
+.cd--on .cd-rail {
+  display: flex;
+}
+
+/* seal / progressive disclosure */
+.sl-hit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  width: 100%;
+  min-height: 3.25rem;
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--muted);
+  padding: 0.65rem;
+}
+
+.sl-hit:hover {
+  border-color: var(--accent2);
+  color: var(--ink);
+}
+
+.sl-g {
+  font-size: 1rem;
+  color: var(--accent);
+}
+
+.sl-lx {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.cd-sl .sl-hit {
+  min-height: 4.5rem;
+}
+
+.rdx-r--sl td {
+  padding: 0.35rem 0.5rem;
+}
+
+.rdx-sl.sl-hit {
+  min-height: 2.5rem;
+}
+
+.chr-i:not(.chr-i--on) {
+  display: block;
+  padding: 0.35rem;
+  background: transparent;
+  border-style: dashed;
+}
+
+.chr-sl .sl-hit {
+  min-height: 2.75rem;
+}
+
+.chr-i--on {
+  display: grid;
+}
+
+.mar-i:not(.mar-i--on) {
+  padding: 0.35rem 0.5rem;
+  border-style: dashed;
+}
+
+.mar-sl .sl-hit {
+  min-height: 3.5rem;
 }
 
 .cd-mv,

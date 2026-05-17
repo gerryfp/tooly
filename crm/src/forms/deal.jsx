@@ -3,7 +3,7 @@ import { L, STAGES } from "../lex";
 export function DealForm({ draft, setDraft, people }) {
   return (
     <>
-      <Field lx="f0">
+      <Field lx="f0" mcpui={{ testid: "deal-title", label: "Deal title" }}>
         <input
           className="inp"
           value={draft.t}
@@ -11,7 +11,7 @@ export function DealForm({ draft, setDraft, people }) {
           required
         />
       </Field>
-      <Field lx="f1">
+      <Field lx="f1" mcpui={{ testid: "deal-value", label: "Deal value in USD" }}>
         <input
           className="inp"
           type="number"
@@ -20,7 +20,7 @@ export function DealForm({ draft, setDraft, people }) {
           onChange={(e) => setDraft({ ...draft, v: Number(e.target.value) })}
         />
       </Field>
-      <Field lx="f2">
+      <Field lx="f2" mcpui={{ testid: "deal-stage", label: "Pipeline stage", kind: "selector" }}>
         <select
           className="inp"
           value={draft.st}
@@ -33,7 +33,7 @@ export function DealForm({ draft, setDraft, people }) {
           ))}
         </select>
       </Field>
-      <Field lx="f3">
+      <Field lx="f3" mcpui={{ testid: "deal-owner", label: "Deal owner", kind: "selector" }}>
         <select
           className="inp"
           value={draft.ow}

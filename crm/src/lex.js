@@ -50,6 +50,8 @@ const PLAIN = {
   e1: "No people yet.",
   e2: "Nothing scheduled.",
   e3: "Blank slate.",
+  r0: "Unseal",
+  r1: "Lattice",
   p0: "low",
   p1: "med",
   p2: "high",

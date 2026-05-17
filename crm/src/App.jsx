@@ -1,5 +1,8 @@
 import { useMemo, useRef, useState } from "react";
+import { Mcpui, useMcpuiRefresh } from "@mcpui/react";
 import { K } from "./components/K";
+import { CaptureAction } from "./mcpui/CaptureAction";
+import { NAV_TABS, TAB_META } from "./mcpui/meta";
 import { Lx } from "./components/Lx";
 import { Modal } from "./components/Modal";
 import { DealForm } from "./forms/deal.jsx";
@@ -27,9 +30,23 @@ export default function App() {
   const { state, patch, upsert, drop, replace, personName } = useVault();
   const [modal, setModal] = useState(null);
   const [draft, setDraft] = useState(null);
+  const [qOpen, setQOpen] = useState(false);
   const importRef = useRef(null);
 
   const tab = useMemo(() => TABS.find((t) => t.id === state.active) ?? TABS[0], [state.active]);
+  const screen = TAB_META[state.active] ?? TAB_META.t0;
+
+  useMcpuiRefresh([
+    state.active,
+    state.q,
+    qOpen,
+    modal,
+    draft,
+    state.deals,
+    state.people,
+    state.tasks,
+    state.notes,
+  ]);
 
   const openCreate = () => {
     const cfg = MODAL[state.active];
@@ -80,30 +97,59 @@ export default function App() {
   const Form = cfg?.Form;
 
   return (
-    <motion-shell className="shell" data-v="3">
-      <aside className="z0" data-zone="rail">
+    <Mcpui.Capture
+      kind="page"
+      testid={`page-${state.active}`}
+      id={`page-${state.active}`}
+      url={screen.url}
+      title={screen.title}
+      label={screen.label}
+    >
+      <motion-shell className="shell" data-v="3">
+        <aside className="z0" data-zone="rail">
         <div className="z0-mark" aria-hidden="true">
           ◇
         </div>
         <nav className="z0-nav" role="presentation">
-          {TABS.map((t) => (
-            <button
-              key={t.id}
-              type="button"
-              className={`z0-tab ${state.active === t.id ? "z0-tab--on" : ""}`}
-              data-op={`nav-${t.id}`}
-              onClick={() => patch({ active: t.id })}
-            >
-              <span className="z0-glyph" aria-hidden="true">
-                {t.glyph}
-              </span>
-              <Lx k={t.id} className="z0-lx" />
-            </button>
-          ))}
+          {TABS.map((t) => {
+            const nav = NAV_TABS.find((n) => n.id === t.id);
+            const btn = (
+              <button
+                type="button"
+                className={`z0-tab ${state.active === t.id ? "z0-tab--on" : ""}`}
+                data-op={`nav-${t.id}`}
+                onClick={() => {
+                  patch({ active: t.id });
+                  setQOpen(false);
+                }}
+              >
+                <span className="z0-glyph" aria-hidden="true">
+                  {t.glyph}
+                </span>
+              </button>
+            );
+            return nav ? (
+              <CaptureAction key={t.id} testid={nav.testid} label={nav.label}>
+                {btn}
+              </CaptureAction>
+            ) : (
+              btn
+            );
+          })}
         </nav>
         <footer className="z0-foot">
-          <K op="x9f2" lx="b0" onClick={() => importRef.current?.click()} />
-          <K op="m4e1" lx="b1" onClick={exportVault} />
+          <K
+            op="x9f2"
+            lx="b0"
+            onClick={() => importRef.current?.click()}
+            mcpui={{ testid: "vault-import", label: "Import vault JSON file" }}
+          />
+          <K
+            op="m4e1"
+            lx="b1"
+            onClick={exportVault}
+            mcpui={{ testid: "vault-export", label: "Export vault JSON file" }}
+          />
           <input
             ref={importRef}
             type="file"
@@ -123,14 +169,31 @@ export default function App() {
         <header className="z1-h">
           <Lx k={tab.hk} as="h1" className="z1-title" />
           <div className="z1-actions">
-            <input
-              className="inp inp--q"
-              data-op="q0"
-              title={L("x5")}
-              value={state.q}
-              onChange={(e) => patch({ q: e.target.value })}
+            {qOpen ? (
+              <Mcpui.Capture testid="filter-query" kind="input" label="Filter people by name, email, company, or tags">
+                <input
+                  className="inp inp--q"
+                  data-op="q0"
+                  title={L("x5")}
+                  value={state.q}
+                  onChange={(e) => patch({ q: e.target.value })}
+                  autoFocus
+                />
+              </Mcpui.Capture>
+            ) : (
+              <K
+                op="q1"
+                lx="r1"
+                onClick={() => setQOpen(true)}
+                mcpui={{ testid: "filter-open", label: "Open people filter field" }}
+              />
+            )}
+            <K
+              op="add"
+              glyph="+"
+              onClick={openCreate}
+              mcpui={{ testid: "record-create", label: `Create new ${screen.title.toLowerCase()} record` }}
             />
-            <K op="add" glyph="+" onClick={openCreate} />
           </div>
         </header>
 
@@ -194,6 +257,7 @@ export default function App() {
           <Form draft={draft} setDraft={setDraft} people={state.people} />
         ) : null}
       </Modal>
-    </motion-shell>
+      </motion-shell>
+    </Mcpui.Capture>
   );
 }

@@ -7,14 +7,18 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "mcpui:seed": "curl -sf http://localhost:5173/layout.md -o mcpui/layout.md && curl -sf http://localhost:5173/mcpui.json -o mcpui/mcpui.json"
   },
   "dependencies": {
+    "@mcpui/react": "^0.1.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@mcpui/spec": "^0.1.0",
+    "@mcpui/vite": "^0.1.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
